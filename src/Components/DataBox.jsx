@@ -15,7 +15,7 @@ const DataBox = ({ data }) => {
           <p>Task</p>
           <p>Complete Status</p>
         </div>
-        <div className='bg-white flex w-full h-[62vh] mt-2 overflow-y-scroll scrollbar-hide rounded-md border-none'>
+        <div className='bg-white flex w-full h-[62vh] mt-2 rounded-md border-none'>
           <div className='flex flex-col w-full justify-between text-center p-4'>
             {first5.map((tx) => {
               return (
@@ -26,9 +26,15 @@ const DataBox = ({ data }) => {
                   <li className='flex flex-row items-center justify-between px-4'>
                     <p className='w-[40%] text-center'>{tx.id}</p>
                     <p className='w-[60%] text-center'>{tx.title}</p>
-                    <p className='w-[40%] text-center'>
-                      {JSON.stringify(tx.completed)}
-                    </p>
+                    {JSON.stringify(tx.completed) === "false" ? (
+                      <p className='w-[40%] text-center font-medium text-red-500'>
+                        {JSON.stringify(tx.completed)}
+                      </p>
+                    ) : (
+                      <p className='w-[40%] text-center font-medium text-green-500'>
+                        {JSON.stringify(tx.completed)}
+                      </p>
+                    )}
                   </li>
                 </ul>
               );
