@@ -2,13 +2,13 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function DropMenu({ setDataLimit }) {
+export default function DropMenu({ limit, setDataLimit }) {
   return (
     <div className='z-20'>
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button className='inline-flex w-full justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-            Items per page
+            {limit} Items per page
             <ChevronDownIcon
               className='ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100'
               aria-hidden='true'
@@ -29,64 +29,64 @@ export default function DropMenu({ setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={() => setDataLimit(5)}
+                    className={`${
+                      active ? "bg-teal-500 text-white" : "text-violet-900"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                    5
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
                     onClick={() => setDataLimit(10)}
                     className={`${
-                      active ? "bg-green-500 text-white" : "text-violet-900"
+                      active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     10
                   </button>
                 )}
               </Menu.Item>
+            </div>
+            <div className='px-1 py-1'>
               <Menu.Item>
                 {({ active }) => (
                   <button
                     onClick={() => setDataLimit(25)}
                     className={`${
-                      active ? "bg-green-500 text-white" : "text-violet-900"
+                      active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     25
                   </button>
                 )}
               </Menu.Item>
-            </div>
-            <div className='px-1 py-1'>
               <Menu.Item>
                 {({ active }) => (
                   <button
                     onClick={() => setDataLimit(50)}
                     className={`${
-                      active ? "bg-green-500 text-white" : "text-violet-900"
+                      active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     50
                   </button>
                 )}
               </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    onClick={() => setDataLimit(100)}
-                    className={`${
-                      active ? "bg-green-500 text-white" : "text-violet-900"
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    100
-                  </button>
-                )}
-              </Menu.Item>
             </div>
             <div className='px-1 py-1'>
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(200)}
+                    onClick={() => setDataLimit(100)}
                     className={`${
-                      active ? "bg-green-500 text-white" : "text-violet-900"
+                      active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
-                    200
+                    100
                   </button>
                 )}
               </Menu.Item>

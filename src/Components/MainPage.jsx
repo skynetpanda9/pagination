@@ -26,7 +26,6 @@ const MainPage = () => {
       const data = await res.json();
       setFullData(data);
     };
-
     getComments();
     getFullData();
   }, [limit]);
@@ -41,9 +40,7 @@ const MainPage = () => {
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
-
     const commentsFormServer = await fetchComments(currentPage);
-
     setItems(commentsFormServer);
   };
 
@@ -59,15 +56,18 @@ const MainPage = () => {
       />
     </div>
   ) : (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col items-center justify-center w-full'>
       <Header />
-      <DataBox
-        data={items}
-        setDataLimit={setLimit}
-        pageCount={pageCount}
-        fullData={fullData}
-        handleClick={handlePageClick}
-      />
+      <div className='lg:w-9/12'>
+        <DataBox
+          data={items}
+          limit={limit}
+          setDataLimit={setLimit}
+          pageCount={pageCount}
+          fullData={fullData}
+          handleClick={handlePageClick}
+        />
+      </div>
     </div>
   );
 };
