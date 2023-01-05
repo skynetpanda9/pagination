@@ -5,12 +5,10 @@ import DataBox from "./DataBox";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
-
+  const [limit, setLimit] = useState(10);
   const [items, setItems] = useState([]);
   const [fullData, setFullData] = useState([]);
   const [pageCount, setpageCount] = useState(0);
-
-  let limit = 10;
 
   useEffect(() => {
     const getComments = async () => {
@@ -65,6 +63,7 @@ const MainPage = () => {
       <Header />
       <DataBox
         data={items}
+        setDataLimit={setLimit}
         pageCount={pageCount}
         fullData={fullData}
         handleClick={handlePageClick}

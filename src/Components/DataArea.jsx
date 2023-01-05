@@ -18,7 +18,7 @@ const DataArea = ({ data }) => {
               >
                 <li className='flex flex-row items-center justify-between px-4'>
                   <p className='w-[40%] text-center'>{tx.id}</p>
-                  <p className='w-[60%] text-center'>{tx.title}</p>
+                  <p className='w-[60%] text-left'>{tx.title}</p>
                   {JSON.stringify(tx.completed) === "false" ? (
                     <p className='w-[40%] text-center font-medium text-red-500'>
                       {JSON.stringify(tx.completed)}
