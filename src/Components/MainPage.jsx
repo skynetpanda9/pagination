@@ -1,23 +1,53 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Header from "./Header";
 import { Dna } from "react-loader-spinner";
 import DataBox from "./DataBox";
 
 const MainPage = () => {
-  const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchTransactions = async () => {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/todos");
-    const { data } = res;
-    setTransactions(data);
-  };
+  const [items, setItems] = useState([]);
+  const [fullData, setFullData] = useState([]);
+  const [pageCount, setpageCount] = useState(0);
+
+  let limit = 10;
 
   useEffect(() => {
-    setLoading(true);
-    fetchTransactions().then(() => setLoading(false));
-  }, []);
+    const getComments = async () => {
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/todos?_page=1&_limit=${limit}`
+      );
+      const data = await res.json();
+      const total = res.headers.get("x-total-count");
+      setpageCount(Math.ceil(total / limit));
+      setItems(data);
+    };
+
+    const getFullData = async () => {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/todos`);
+      const data = await res.json();
+      setFullData(data);
+    };
+
+    getComments();
+    getFullData();
+  }, [limit]);
+
+  const fetchComments = async (currentPage) => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/todos?_page=${currentPage}&_limit=${limit}`
+    );
+    const data = await res.json();
+    return data;
+  };
+
+  const handlePageClick = async (data) => {
+    let currentPage = data.selected + 1;
+
+    const commentsFormServer = await fetchComments(currentPage);
+
+    setItems(commentsFormServer);
+  };
 
   return loading ? (
     <div>
@@ -33,7 +63,12 @@ const MainPage = () => {
   ) : (
     <div className='flex flex-col w-full'>
       <Header />
-      <DataBox data={transactions} />
+      <DataBox
+        data={items}
+        pageCount={pageCount}
+        fullData={fullData}
+        handleClick={handlePageClick}
+      />
     </div>
   );
 };
