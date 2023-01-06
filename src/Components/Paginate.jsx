@@ -23,15 +23,23 @@ const Paginate = ({ postsPerPage, totalPosts, paginate }) => {
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageClick}
-        containerClassName={"pagination justify-content-center"}
-        pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previousClassName={"page-item"}
-        previousLinkClassName={"page-link"}
-        nextClassName={"page-item"}
-        nextLinkClassName={"page-link"}
-        breakClassName={"page-item"}
-        breakLinkClassName={"page-link"}
+        containerClassName={"flex flex-row justify-content-center"}
+        pageClassName={"rounded-md bg-emerald-800/70"}
+        pageLinkClassName={
+          "page-link rounded-md bg-emerald-800/30 text-emerald-200"
+        }
+        previousClassName={"rounded-md bg-emerald-800/70 text-emerald-200"}
+        previousLinkClassName={
+          "page-link rounded-md bg-emerald-800/30 text-emerald-200"
+        }
+        nextClassName={"rounded-md bg-emerald-800/70 text-emerald-200"}
+        nextLinkClassName={
+          "page-link rounded-md bg-emerald-800/70 text-emerald-200"
+        }
+        breakClassName={"rounded-md bg-emerald-800/70 text-emerald-200"}
+        breakLinkClassName={
+          "page-link rounded-md bg-emerald-800/70 text-emerald-200"
+        }
         activeClassName={"active"}
       />
     </div>

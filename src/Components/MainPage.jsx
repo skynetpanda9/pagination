@@ -29,7 +29,7 @@ const MainPage = () => {
       return (
         <div key={tx.id}>
           <ul className='grid grid-cols-1 items-center justify-between'>
-            <li className='flex flex-row items-center justify-between px-4 text-blue-900'>
+            <li className='flex flex-row items-center justify-between px-4 text-white'>
               <p className='w-[40%] text-center'>{tx.id}</p>
               <p className='w-[60%] text-left'>{tx.title}</p>
               {JSON.stringify(tx.completed) === "false" ? (
