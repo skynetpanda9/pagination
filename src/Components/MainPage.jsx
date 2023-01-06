@@ -59,7 +59,7 @@ const MainPage = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts =
-    myApi.length === 0 && searchUser !== ""
+    myApi.length === 0 && searchUser !== "" && showSearch
       ? "Not Found..."
       : myApi?.slice(indexOfFirstPost, indexOfLastPost);
 
@@ -76,6 +76,16 @@ const MainPage = () => {
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  window.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (event.key === "Escape") {
+      setShowSearch(false);
+      setSearchUser("");
+    }
+  });
 
   return loading ? (
     <div>
@@ -97,7 +107,9 @@ const MainPage = () => {
           <div className='flex flex-row items-center justify-center'>
             {showSearch ? <Search onChange={handleSearchInput} /> : <></>}
             <div
-              onClick={() => setShowSearch(!showSearch)}
+              onClick={() => {
+                setShowSearch(!showSearch);
+              }}
               className='ml-2 p-2 cursor-pointer rounded bg-emerald-800/30 backdrop-blur-sm items-center justify-center flex'
             >
               {showSearch ? (
