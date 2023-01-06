@@ -9,7 +9,7 @@ const DataArea = ({ currentPosts }) => {
         <p>Complete Status</p>
       </div>
       <div className='bg-emerald-800/30 flex w-full h-[62vh] mt-2 rounded-md border-none'>
-        <div className='flex flex-col w-full overflow-x-scroll text-center text-white p-4'>
+        <div className='flex flex-col w-full overflow-y-scroll text-center scrollbar-hide text-white p-4'>
           {currentPosts}
         </div>
       </div>

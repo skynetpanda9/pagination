@@ -12,25 +12,30 @@ const MainPage = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const [query, setQuery] = useState("");
   const [searchUser, setSearchUser] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then((data) => data.json())
       .then((res) => {
         setData(res);
         let myApi = renderData(res);
         setMyApi(myApi);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   }, []);
 
   const renderData = (data) => {
-    return data.map((tx) => {
+    return data.map((tx, idx) => {
       return (
         <div key={tx.id}>
           <ul className='grid grid-cols-1 items-center justify-between'>
             <li className='flex flex-row items-center justify-between px-4 text-white'>
-              <p className='w-[40%] text-center'>{tx.id}</p>
+              <p className='w-[40%] text-center'>{idx + 1}</p>
               <p className='w-[60%] text-left'>{tx.title}</p>
               {JSON.stringify(tx.completed) === "false" ? (
                 <p className='w-[40%] text-center font-medium text-red-500'>
@@ -51,7 +56,10 @@ const MainPage = () => {
   // get current post
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = myApi?.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts =
+    myApi.length === 0 && searchUser !== ""
+      ? "Not Found..."
+      : myApi?.slice(indexOfFirstPost, indexOfLastPost);
 
   // search users by user input
   const handleSearchInput = (event) => {
