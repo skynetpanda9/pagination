@@ -18,9 +18,9 @@ const DataBox = ({
 
   const filteredData =
     query === ""
-      ? []
-      : fullData.filter((fullData) =>
-          fullData.title
+      ? data
+      : data.filter((data) =>
+          data.title
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
@@ -48,7 +48,7 @@ const DataBox = ({
           {showSearchArea ? (
             <div className='w-72 z-50 flex flex-row cursor-pointer bg-white rounded-md p-1 self-end justify-between'>
               <input
-                type='search'
+                type='text'
                 style={{
                   outline: "none",
                 }}
@@ -75,7 +75,7 @@ const DataBox = ({
             </div>
           )}
         </div>
-        <DataArea data={data} />
+        <DataArea data={filteredData} />
       </div>
       <div className='mt-2'>
         <Paginate pageCount={pageCount} handlePageClick={handleClick} />

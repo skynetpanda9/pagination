@@ -2,7 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function DropMenu({ limit, setDataLimit }) {
+export default function DropMenu({ limit, setDataLimit, setCurrentPage }) {
   return (
     <div className='z-20'>
       <Menu as='div' className='relative inline-block text-left'>
@@ -29,7 +29,9 @@ export default function DropMenu({ limit, setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(5)}
+                    onClick={() => {
+                      setDataLimit(5);
+                    }}
                     className={`${
                       active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -41,7 +43,9 @@ export default function DropMenu({ limit, setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(10)}
+                    onClick={() => {
+                      setDataLimit(10);
+                    }}
                     className={`${
                       active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -55,7 +59,9 @@ export default function DropMenu({ limit, setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(25)}
+                    onClick={() => {
+                      setDataLimit(25);
+                    }}
                     className={`${
                       active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -67,7 +73,9 @@ export default function DropMenu({ limit, setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(50)}
+                    onClick={() => {
+                      setDataLimit(50);
+                    }}
                     className={`${
                       active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -81,7 +89,9 @@ export default function DropMenu({ limit, setDataLimit }) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    onClick={() => setDataLimit(100)}
+                    onClick={() => {
+                      setDataLimit(100);
+                    }}
                     className={`${
                       active ? "bg-teal-500 text-white" : "text-violet-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
