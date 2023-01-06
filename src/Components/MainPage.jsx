@@ -6,14 +6,16 @@ import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
 
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
+
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
   const [myApi, setMyApi] = useState([]);
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  const [query, setQuery] = useState("");
   const [searchUser, setSearchUser] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -64,7 +66,7 @@ const MainPage = () => {
   // search users by user input
   const handleSearchInput = (event) => {
     setCurrentPage(1);
-    setSearchUser(event.target.value);
+    showSearch ? setSearchUser(event.target.value) : setSearchUser("");
     const newData = renderData(
       data.filter((item) =>
         item.title.toLowerCase().includes(event.target.value)
@@ -92,7 +94,19 @@ const MainPage = () => {
       <div className='w-full lg:w-9/12'>
         <div className='flex flex-row w-full items-center justify-between mt-4'>
           <DropMenu limit={postsPerPage} setDataLimit={setPostsPerPage} />
-          <Search onChange={handleSearchInput} />
+          <div className='flex flex-row items-center justify-center'>
+            {showSearch ? <Search onChange={handleSearchInput} /> : <></>}
+            <div
+              onClick={() => setShowSearch(!showSearch)}
+              className='ml-2 p-2 cursor-pointer rounded bg-emerald-800/30 backdrop-blur-sm items-center justify-center flex'
+            >
+              {showSearch ? (
+                <XMarkIcon className='w-4 h-4 text-white' />
+              ) : (
+                <MagnifyingGlassIcon className='w-4 h-4 text-white' />
+              )}
+            </div>
+          </div>
         </div>
         <DataArea currentPosts={currentPosts} />
         <Paginate
