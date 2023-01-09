@@ -35,7 +35,7 @@ const Paginate = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
         breakClassName={"page-item"}
         breakLinkClassName={"page-link text-emerald-400 hover:text-emerald-900"}
         activeClassName={"active"}
-        forcePage={currentPage}
+        forcePage={currentPage - 1}
       />
     </div>
   );

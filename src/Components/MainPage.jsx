@@ -98,7 +98,7 @@ const MainPage = () => {
         <DataArea currentPosts={currentPosts} />
         <Paginate
           postsPerPage={postsPerPage}
-          currentPage={currentPage - 1}
+          currentPage={currentPage}
           totalPosts={myRenData?.length}
           paginate={paginate}
         />
