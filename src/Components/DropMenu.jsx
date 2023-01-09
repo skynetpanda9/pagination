@@ -2,12 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function DropMenu({
-  limit,
-  setDataLimit,
-  currentPage,
-  setCurrentPage,
-}) {
+export default function DropMenu({ limit, setDataLimit, setCurrentPage }) {
   return (
     <div className='z-20'>
       <Menu as='div' className='relative inline-block text-left'>
@@ -36,6 +31,7 @@ export default function DropMenu({
                   <button
                     onClick={() => {
                       setDataLimit(5);
+                      setCurrentPage(1);
                     }}
                     className={`${
                       active ? "bg-teal-500/30 text-white" : "text-white"
@@ -50,6 +46,7 @@ export default function DropMenu({
                   <button
                     onClick={() => {
                       setDataLimit(10);
+                      setCurrentPage(1);
                     }}
                     className={`${
                       active ? "bg-teal-500/30 text-white" : "text-white"
@@ -66,6 +63,7 @@ export default function DropMenu({
                   <button
                     onClick={() => {
                       setDataLimit(25);
+                      setCurrentPage(1);
                     }}
                     className={`${
                       active ? "bg-teal-500/30 text-white" : "text-white"
@@ -80,6 +78,7 @@ export default function DropMenu({
                   <button
                     onClick={() => {
                       setDataLimit(50);
+                      setCurrentPage(1);
                     }}
                     className={`${
                       active ? "bg-teal-500/30 text-white" : "text-white"
@@ -96,6 +95,7 @@ export default function DropMenu({
                   <button
                     onClick={() => {
                       setDataLimit(100);
+                      setCurrentPage(1);
                     }}
                     className={`${
                       active ? "bg-teal-500/30 text-white" : "text-white"
