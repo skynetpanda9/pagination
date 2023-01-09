@@ -20,8 +20,7 @@ const MainPage = () => {
       .then((data) => data.json())
       .then((res) => {
         setData(res);
-        let newData = renderData(res);
-        setMyRenData(newData);
+        setMyRenData(renderData(res));
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -56,7 +55,7 @@ const MainPage = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts =
-    myRenData.length === 0 && query !== ""
+    myRenData?.length === 0 && query !== ""
       ? "Not Found..."
       : myRenData?.slice(indexOfFirstPost, indexOfLastPost);
 
