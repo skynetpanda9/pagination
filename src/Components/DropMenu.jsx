@@ -2,7 +2,12 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-export default function DropMenu({ limit, setDataLimit, setCurrentPage }) {
+export default function DropMenu({
+  limit,
+  setDataLimit,
+  currentPage,
+  setCurrentPage,
+}) {
   return (
     <div className='z-20'>
       <Menu as='div' className='relative inline-block text-left'>

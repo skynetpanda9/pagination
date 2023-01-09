@@ -6,16 +6,15 @@ import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
 
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { TrashIcon } from "@heroicons/react/20/solid";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
-  const [myApi, setMyApi] = useState([]);
   const [data, setData] = useState([]);
+  const [myRenData, setMyRenData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
-  const [searchUser, setSearchUser] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -23,8 +22,8 @@ const MainPage = () => {
       .then((data) => data.json())
       .then((res) => {
         setData(res);
-        let myApi = renderData(res);
-        setMyApi(myApi);
+        let myRenData = renderData(res);
+        setMyRenData(myRenData);
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -59,33 +58,13 @@ const MainPage = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts =
-    myApi.length === 0 && searchUser !== "" && showSearch
+    myRenData.length === 0 && query !== ""
       ? "Not Found..."
-      : myApi?.slice(indexOfFirstPost, indexOfLastPost);
+      : myRenData?.slice(indexOfFirstPost, indexOfLastPost);
 
   // search users by user input
-  const handleSearchInput = (event) => {
-    setCurrentPage(1);
-    showSearch ? setSearchUser(event.target.value) : setSearchUser("");
-    const newData = renderData(
-      data.filter((item) =>
-        item.title.toLowerCase().includes(event.target.value)
-      )
-    );
-    setMyApi(newData);
-  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  window.addEventListener("keydown", (event) => {
-    if (event.defaultPrevented) {
-      return;
-    }
-    if (event.key === "Escape") {
-      setShowSearch(false);
-      setSearchUser("");
-    }
-  });
 
   return loading ? (
     <div>
@@ -103,27 +82,35 @@ const MainPage = () => {
       <Header />
       <div className='w-full lg:w-9/12'>
         <div className='flex flex-row w-full items-center justify-between mt-4'>
-          <DropMenu limit={postsPerPage} setDataLimit={setPostsPerPage} />
+          <DropMenu
+            limit={postsPerPage}
+            setDataLimit={setPostsPerPage}
+            setCurrentPage={setCurrentPage}
+          />
           <div className='flex flex-row items-center justify-center'>
-            {showSearch ? <Search onChange={handleSearchInput} /> : <></>}
+            <Search
+              data={data}
+              renderData={renderData}
+              setCurrentPage={setCurrentPage}
+              setMyRenData={setMyRenData}
+              value={query}
+              setQuery={setQuery}
+            />
             <div
               onClick={() => {
-                setShowSearch(!showSearch);
+                setQuery("");
+                setMyRenData(renderData(data));
               }}
               className='ml-2 p-2 cursor-pointer rounded bg-emerald-800/30 backdrop-blur-sm items-center justify-center flex'
             >
-              {showSearch ? (
-                <XMarkIcon className='w-4 h-4 text-white' />
-              ) : (
-                <MagnifyingGlassIcon className='w-4 h-4 text-white' />
-              )}
+              <TrashIcon className='w-4 h-4 text-white' />
             </div>
           </div>
         </div>
         <DataArea currentPosts={currentPosts} />
         <Paginate
           postsPerPage={postsPerPage}
-          totalPosts={myApi?.length}
+          totalPosts={myRenData?.length}
           paginate={paginate}
         />
       </div>
