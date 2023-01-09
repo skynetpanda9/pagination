@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-const Paginate = ({ postsPerPage, totalPosts, paginate }) => {
+const Paginate = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -16,8 +16,8 @@ const Paginate = ({ postsPerPage, totalPosts, paginate }) => {
   return (
     <div className='mt-4'>
       <ReactPaginate
-        previousLabel={"previous"}
-        nextLabel={"next"}
+        previousLabel={"<"}
+        nextLabel={">"}
         breakLabel={"..."}
         pageCount={pageNumbers.length}
         marginPagesDisplayed={2}
@@ -35,6 +35,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate }) => {
         breakClassName={"page-item"}
         breakLinkClassName={"page-link text-emerald-400 hover:text-emerald-900"}
         activeClassName={"active"}
+        forcePage={currentPage}
       />
     </div>
   );

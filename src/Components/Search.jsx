@@ -20,16 +20,15 @@ const Search = ({
   return (
     <div className='w-72 bg-emerald-800/30 backdrop-blur-sm rounded-md py-1 px-2'>
       <input
-        type='text'
+        type='search'
         style={{
           outline: "none",
           background: "none",
         }}
-        className='text-white'
+        className='text-white w-full'
         placeholder='search tasks'
         onChange={handleSearchInput}
         value={value}
-        autoFocus
       />
     </div>
   );

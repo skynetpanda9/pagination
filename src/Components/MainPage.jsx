@@ -6,8 +6,6 @@ import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
 
-import { TrashIcon } from "@heroicons/react/20/solid";
-
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -22,8 +20,8 @@ const MainPage = () => {
       .then((data) => data.json())
       .then((res) => {
         setData(res);
-        let myRenData = renderData(res);
-        setMyRenData(myRenData);
+        let newData = renderData(res);
+        setMyRenData(newData);
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -62,8 +60,7 @@ const MainPage = () => {
       ? "Not Found..."
       : myRenData?.slice(indexOfFirstPost, indexOfLastPost);
 
-  // search users by user input
-
+  // set page number in pagination
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return loading ? (
@@ -91,25 +88,17 @@ const MainPage = () => {
             <Search
               data={data}
               renderData={renderData}
-              setCurrentPage={setCurrentPage}
               setMyRenData={setMyRenData}
+              setCurrentPage={setCurrentPage}
               value={query}
               setQuery={setQuery}
             />
-            <div
-              onClick={() => {
-                setQuery("");
-                setMyRenData(renderData(data));
-              }}
-              className='ml-2 p-2 cursor-pointer rounded bg-emerald-800/30 backdrop-blur-sm items-center justify-center flex'
-            >
-              <TrashIcon className='w-4 h-4 text-white' />
-            </div>
           </div>
         </div>
         <DataArea currentPosts={currentPosts} />
         <Paginate
           postsPerPage={postsPerPage}
+          currentPage={currentPage - 1}
           totalPosts={myRenData?.length}
           paginate={paginate}
         />

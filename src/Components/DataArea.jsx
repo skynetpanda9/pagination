@@ -6,7 +6,7 @@ const DataArea = ({ currentPosts }) => {
       <div className='grid grid-cols-3 px-3 text-center text-white font-semibold items-center w-full justify-between bg-emerald-800/30 h-10 rounded-md border-none'>
         <p>Index</p>
         <p>Task</p>
-        <p>Complete Status</p>
+        <p>Completed Status</p>
       </div>
       <div className='bg-emerald-800/30 flex w-full h-[62vh] mt-2 rounded-md border-none'>
         <div className='flex flex-col w-full overflow-y-scroll text-center scrollbar-hide text-white p-4'>
