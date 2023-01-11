@@ -3,7 +3,7 @@ import React from "react";
 const DataArea = ({ currentPosts }) => {
   return (
     <div className='flex flex-col p-2 w-full items-center justify-center h-[70vh] relative backdrop-blur-sm  bg-emerald-800/30 rounded-md shadow-md mt-2'>
-      <div className='grid grid-cols-3 px-3 text-center text-white font-semibold items-center w-full justify-between bg-emerald-800/30 h-10 rounded-md border-none'>
+      <div className='grid grid-cols-3 px-0 text-center text-white font-semibold items-center w-full justify-between bg-emerald-800/30 h-10 rounded-md border-none'>
         <p>Index</p>
         <p>Task</p>
         <p>Completed Status</p>
