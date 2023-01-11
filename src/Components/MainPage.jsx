@@ -5,7 +5,7 @@ import DataArea from "./DataArea";
 import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
-import Highlighter from "react-highlight-words";
+import Highlighter from "./Highlighter";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
@@ -31,22 +31,18 @@ const MainPage = () => {
       });
   }, []);
 
-  const renderData = (data, word) => {
+  const renderData = (data, highlight) => {
     return data.map((tx, idx) => {
       return (
         <div key={tx.id}>
           <ul className='grid grid-cols-1 items-center justify-between'>
-            <li className='flex flex-row items-center justify-between px-4 text-white'>
-              <p className='w-[40%] text-center'>{idx + 1}</p>
-              <Highlighter
-                className='w-[60%] text-left'
-                highlightClassName='rounded text-emerald-900'
-                searchWords={[word]}
-                autoEscape={true}
-                textToHighlight={tx.title}
-              />
+            <li className='flex flex-row items-start justify-between px-4 text-white'>
+              <p className='w-[30%] text-center'>{idx + 1}</p>
+              <div className='w-[60%] text-left'>
+                <Highlighter highlight={highlight}>{tx.title}</Highlighter>
+              </div>
               <p
-                className={`w-[40%] text-center font-medium text-${
+                className={`w-[30%] text-center font-medium text-${
                   tx.completed ? "green" : "red"
                 }-500`}
               >

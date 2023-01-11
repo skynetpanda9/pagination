@@ -47,11 +47,12 @@ const PaginateComponent = (props) => {
         <div className='arrow left' />
       </li>
 
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, idx) => {
         // Left Dot
         if (pageNumber === DOTSLEFT) {
           return (
             <li
+              key={idx}
               // onClick={() => onPageChange(currentPage - 4)}
               className='pagination-item dots'
             >
@@ -64,6 +65,7 @@ const PaginateComponent = (props) => {
         if (pageNumber === DOTSRIGHT) {
           return (
             <li
+              key={idx}
               // onClick={() => onPageChange(currentPage + 4)}
               className='pagination-item dots'
             >
@@ -75,6 +77,7 @@ const PaginateComponent = (props) => {
         // Render our Page Pills
         return (
           <li
+            key={idx}
             className={classnames("pagination-item", {
               selected: pageNumber === currentPage,
             })}
