@@ -37,7 +37,7 @@ const MainPage = () => {
               <p className='w-[40%] text-center'>{idx + 1}</p>
               <Highlighter
                 className='w-[60%] text-left'
-                highlightClassName='search'
+                highlightClassName='rounded text-emerald-900'
                 searchWords={[word]}
                 autoEscape={true}
                 textToHighlight={tx.title}
