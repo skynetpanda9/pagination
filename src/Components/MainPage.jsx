@@ -25,6 +25,9 @@ const MainPage = () => {
         setTimeout(() => {
           setLoading(false);
         }, 500);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
@@ -42,15 +45,13 @@ const MainPage = () => {
                 autoEscape={true}
                 textToHighlight={tx.title}
               />
-              {JSON.stringify(tx.completed) === "false" ? (
-                <p className='w-[40%] text-center font-medium text-red-500'>
-                  {JSON.stringify(tx.completed)}
-                </p>
-              ) : (
-                <p className='w-[40%] text-center font-medium text-green-500'>
-                  {JSON.stringify(tx.completed)}
-                </p>
-              )}
+              <p
+                className={`w-[40%] text-center font-medium text-${
+                  tx.completed ? "green" : "red"
+                }-500`}
+              >
+                {`${tx.completed}`}
+              </p>
             </li>
           </ul>
         </div>
@@ -59,8 +60,8 @@ const MainPage = () => {
   };
 
   // get current post
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const indexOfFirstPost = (currentPage - 1) * postsPerPage;
+  const indexOfLastPost = indexOfFirstPost + postsPerPage;
   const currentPosts =
     myRenData?.length === 0 && query !== ""
       ? "Not Found..."
