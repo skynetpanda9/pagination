@@ -9,10 +9,12 @@ const Search = ({
   setQuery,
 }) => {
   const handleSearchInput = (e) => {
+    e.preventDefault();
     setQuery(e.target.value);
     setCurrentPage(1);
     const newData = renderData(
-      data.filter((item) => item.title.toLowerCase().includes(e.target.value))
+      data.filter((item) => item.title.toLowerCase().includes(e.target.value)),
+      e.target.value
     );
     setMyRenData(newData);
   };
