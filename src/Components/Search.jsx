@@ -2,7 +2,7 @@ import React from "react";
 
 const Search = ({
   data,
-  renderData,
+  RenderData,
   setCurrentPage,
   setMyRenData,
   value,
@@ -12,7 +12,7 @@ const Search = ({
     e.preventDefault();
     setQuery(e.target.value);
     setCurrentPage(1);
-    const newData = renderData(
+    const newData = RenderData(
       data.filter((item) => item.title.toLowerCase().includes(e.target.value)),
       e.target.value
     );

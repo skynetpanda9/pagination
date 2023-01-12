@@ -1,8 +1,7 @@
 import React from "react";
 import { useMemo } from "react";
 
-export const DOTSLEFT = "...";
-export const DOTSRIGHT = "...";
+export const DOTS = "...";
 
 const range = (start, end) => {
   let length = end - start + 1;
@@ -40,7 +39,7 @@ export const usePagination = ({
       let leftItemCount = 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
 
-      return [...leftRange, DOTSRIGHT, totalPageCount];
+      return [...leftRange, DOTS, totalPageCount];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
@@ -49,18 +48,12 @@ export const usePagination = ({
         totalPageCount - rightItemCount + 1,
         totalPageCount
       );
-      return [firstPageIndex, DOTSLEFT, ...rightRange];
+      return [firstPageIndex, DOTS, ...rightRange];
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [
-        firstPageIndex,
-        DOTSLEFT,
-        ...middleRange,
-        DOTSRIGHT,
-        lastPageIndex,
-      ];
+      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
   }, [totalCount, pageSize, siblingCount, currentPage]);
 

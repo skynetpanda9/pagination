@@ -5,8 +5,7 @@ import DataArea from "./DataArea";
 import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
-import Highlighter from "./Highlighter";
-import HighCompo from "./Highlighter";
+import RenderData from "./Render";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +21,7 @@ const MainPage = () => {
       .then((data) => data.json())
       .then((res) => {
         setData(res);
-        setMyRenData(renderData(res));
+        setMyRenData(RenderData(res));
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -31,32 +30,6 @@ const MainPage = () => {
         console.error(err);
       });
   }, []);
-
-  const renderData = (data, highlight) => {
-    return data.map((tx, idx) => {
-      return (
-        <div key={tx.id}>
-          <ul className='grid grid-cols-1 py-1 items-center justify-between'>
-            <li className='flex flex-row items-start justify-between px-4 my-1 h-10 text-white rounded-md'>
-              <p className='w-[30%] text-center'>{idx + 1}</p>
-              <div className='w-[60%] text-left'>
-                <HighCompo key={tx.id} value={tx.title} highlight={highlight} />
-              </div>
-              <p
-                className={
-                  "w-[30%] text-center font-medium text-" +
-                  (tx.completed ? "green" : "red") +
-                  "-500"
-                }
-              >
-                {`${tx.completed}`}
-              </p>
-            </li>
-          </ul>
-        </div>
-      );
-    });
-  };
 
   // get current post
   const indexOfFirstPost = (currentPage - 1) * postsPerPage;
@@ -93,7 +66,7 @@ const MainPage = () => {
           <div className='flex flex-row items-center justify-center'>
             <Search
               data={data}
-              renderData={renderData}
+              RenderData={RenderData}
               setMyRenData={setMyRenData}
               setCurrentPage={setCurrentPage}
               value={query}

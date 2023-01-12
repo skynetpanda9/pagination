@@ -3,16 +3,14 @@ import classnames from "classnames";
 import { usePagination, DOTSLEFT, DOTSRIGHT } from "../Utils/usePaginate";
 import "./Paginate.css";
 
-const PaginateComponent = (props) => {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-    className,
-  } = props;
-
+const PaginateComponent = ({
+  onPageChange,
+  totalCount,
+  siblingCount = 1,
+  currentPage,
+  pageSize,
+  className,
+}) => {
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -48,27 +46,10 @@ const PaginateComponent = (props) => {
       </li>
 
       {paginationRange.map((pageNumber, idx) => {
-        // Left Dot
-        if (pageNumber === DOTSLEFT) {
+        // Render Dots
+        if (pageNumber === DOTS) {
           return (
-            <li
-              key={idx}
-              // onClick={() => onPageChange(currentPage - 4)}
-              className='pagination-item dots'
-            >
-              ...
-            </li>
-          );
-        }
-
-        // Right Dot
-        if (pageNumber === DOTSRIGHT) {
-          return (
-            <li
-              key={idx}
-              // onClick={() => onPageChange(currentPage + 4)}
-              className='pagination-item dots'
-            >
+            <li key={idx} className='pagination-item dots'>
               &#8230;
             </li>
           );
