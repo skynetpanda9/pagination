@@ -1,4 +1,3 @@
-import React from "react";
 import { useMemo } from "react";
 
 export const DOTS = "...";
@@ -8,54 +7,35 @@ const range = (start, end) => {
   return Array.from({ length }, (_, idx) => idx + start);
 };
 
-export const usePagination = ({
-  totalCount,
-  pageSize,
-  siblingCount = 1,
-  currentPage,
-}) => {
+export const usePagination = ({ totalCount, pageSize, currentPage }) => {
   const paginationRange = useMemo(() => {
-    const totalPageCount = Math.ceil(totalCount / pageSize);
+    const totalPageCount = Math.ceil(totalCount / pageSize); //20 (when items/page = 10) (200/10)
 
-    const totalPageNumbers = siblingCount + 5;
-
-    if (totalPageNumbers >= totalPageCount) {
+    if (totalPageCount <= 6) {
       return range(1, totalPageCount);
     }
 
-    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
-    const rightSiblingIndex = Math.min(
-      currentPage + siblingCount,
-      totalPageCount
-    );
+    const leftSiblingIndex = Math.max(currentPage - 1, 1); //4 if currentPage == 5
+    const rightSiblingIndex = Math.min(currentPage + 1, totalPageCount); //6 if currentPage == 5
 
     const shouldShowLeftDots = leftSiblingIndex > 2;
     const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
 
-    const firstPageIndex = 1;
-    const lastPageIndex = totalPageCount;
-
     if (!shouldShowLeftDots && shouldShowRightDots) {
-      let leftItemCount = 3 + 2 * siblingCount;
-      let leftRange = range(1, leftItemCount);
-
+      let leftRange = range(1, 5);
       return [...leftRange, DOTS, totalPageCount];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      let rightItemCount = 3 + 2 * siblingCount;
-      let rightRange = range(
-        totalPageCount - rightItemCount + 1,
-        totalPageCount
-      );
-      return [firstPageIndex, DOTS, ...rightRange];
+      let rightRange = range(totalPageCount - 4, totalPageCount);
+      return [1, DOTS, ...rightRange]; // 1 --> (firstpageindex)
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+      return [1, DOTS, ...middleRange, DOTS, totalPageCount]; // 1 --> (firstpageindex)
     }
-  }, [totalCount, pageSize, siblingCount, currentPage]);
+  }, [totalCount, pageSize, 1, currentPage]);
 
   return paginationRange;
 };

@@ -3,9 +3,9 @@ import Header from "./Header";
 import { Dna } from "react-loader-spinner";
 import DataArea from "./DataArea";
 import Search from "./Search";
-import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
 import RenderData from "./Render";
+import Paginate from "./Paginate";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
@@ -74,10 +74,10 @@ const MainPage = () => {
         </div>
         <DataArea currentPosts={currentPosts} />
         <Paginate
-          postsPerPage={postsPerPage}
-          currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          totalPosts={myRenData?.length}
+          totalCount={myRenData?.length}
+          currentPage={currentPage}
+          pageSize={postsPerPage}
         />
       </div>
     </div>

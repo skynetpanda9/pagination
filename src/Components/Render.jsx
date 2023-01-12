@@ -2,7 +2,10 @@ import React from "react";
 import HighCompo from "./Highlighter";
 
 const RenderData = (data, highlight) => {
-  const getColor = (color) => (color ? "green" : "red");
+  const getColor = (color) =>
+    color
+      ? "w-[30%] text-center font-medium text-green-500"
+      : "w-[30%] text-center font-medium text-red-500";
   return data.map((tx, idx) => {
     return (
       <div key={tx.id}>
@@ -12,13 +15,7 @@ const RenderData = (data, highlight) => {
             <div className='w-[60%] text-left'>
               <HighCompo key={tx.id} value={tx.title} highlight={highlight} />
             </div>
-            <p
-              className={`w-[30%] text-center font-medium text-${getColor(
-                tx.completed
-              )}-500`}
-            >
-              {`${tx.completed}`}
-            </p>
+            <p className={`${getColor(tx.completed)}`}>{`${tx.completed}`}</p>
           </li>
         </ul>
       </div>
