@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
-import { usePagination, DOTS } from "../Utils/usePaginate";
-import "./Paginate.css";
+import { usePagination } from "../Utils/usePaginate";
+import "../Styles/Paginate.css";
 
 const Paginate = ({
   setCurrentPage,
@@ -45,14 +45,13 @@ const Paginate = ({
         {/* Middle Data*/}
         {paginationRange.map((pageNumber, idx) => {
           // Render Dots
-          if (pageNumber === DOTS) {
+          if (pageNumber === "...") {
             return (
               <li key={idx} className='pagination-item dots'>
                 &#8230;
               </li>
             );
           }
-
           // Render Page Pills
           return (
             <li

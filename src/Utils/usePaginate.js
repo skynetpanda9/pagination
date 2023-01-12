@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export const DOTS = "...";
+// export const DOTS = "...";
 
 const range = (start, end) => {
   let length = end - start + 1;
@@ -23,19 +23,19 @@ export const usePagination = ({ totalCount, pageSize, currentPage }) => {
 
     if (!shouldShowLeftDots && shouldShowRightDots) {
       let leftRange = range(1, 5);
-      return [...leftRange, DOTS, totalPageCount];
+      return [...leftRange, "...", totalPageCount];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
       let rightRange = range(totalPageCount - 4, totalPageCount);
-      return [1, DOTS, ...rightRange]; // 1 --> (firstpageindex)
+      return [1, "...", ...rightRange]; // 1 --> (firstpageindex)
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [1, DOTS, ...middleRange, DOTS, totalPageCount]; // 1 --> (firstpageindex)
+      return [1, "...", ...middleRange, "...", totalPageCount]; // 1 --> (firstpageindex)
     }
-  }, [totalCount, pageSize, 1, currentPage]);
+  }, [totalCount, pageSize, currentPage]);
 
   return paginationRange;
 };
