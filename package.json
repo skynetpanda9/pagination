@@ -16,6 +16,7 @@
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
     "react-paginate": "^8.1.4",
+    "react-router-dom": "^6.6.2",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {

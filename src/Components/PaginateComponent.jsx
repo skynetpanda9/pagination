@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { usePagination, DOTSLEFT, DOTSRIGHT } from "../Utils/usePaginate";
+import { usePagination, DOTS } from "../Utils/usePaginate";
 import "./Paginate.css";
 
 const PaginateComponent = ({
