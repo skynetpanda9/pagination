@@ -6,6 +6,7 @@ import Search from "./Search";
 import Paginate from "./Paginate";
 import DropMenu from "./DropMenu";
 import Highlighter from "./Highlighter";
+import HighCompo from "./Highlighter";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(false);
@@ -39,7 +40,7 @@ const MainPage = () => {
             <li className='flex flex-row items-start justify-between px-4 my-1 h-10 text-white rounded-md'>
               <p className='w-[30%] text-center'>{idx + 1}</p>
               <div className='w-[60%] text-left'>
-                <Highlighter highlight={highlight}>{tx.title}</Highlighter>
+                <HighCompo key={tx.id} value={tx.title} highlight={highlight} />
               </div>
               <p
                 className={
