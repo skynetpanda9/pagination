@@ -23,11 +23,7 @@ const Search = ({
     <div className='w-72 bg-emerald-800/30 backdrop-blur-sm rounded-md py-1 px-2'>
       <input
         type='search'
-        style={{
-          outline: "none",
-          background: "none",
-        }}
-        className='text-white w-full'
+        className='text-white w-full outline-none bg-transparent'
         placeholder='search tasks'
         onChange={handleSearchInput}
         value={value}

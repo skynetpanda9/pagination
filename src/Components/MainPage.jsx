@@ -27,6 +27,7 @@ const MainPage = () => {
         }, 500);
       })
       .catch((err) => {
+        setLoading(true);
         console.error(err);
       });
   }, []);
@@ -38,9 +39,6 @@ const MainPage = () => {
     myRenData?.length === 0 && query !== ""
       ? "Not Found..."
       : myRenData?.slice(indexOfFirstPost, indexOfLastPost);
-
-  // set page number in pagination
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return loading ? (
     <div>
@@ -78,8 +76,8 @@ const MainPage = () => {
         <Paginate
           postsPerPage={postsPerPage}
           currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
           totalPosts={myRenData?.length}
-          paginate={paginate}
         />
       </div>
     </div>

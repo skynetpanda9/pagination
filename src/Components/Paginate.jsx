@@ -1,7 +1,15 @@
 import React from "react";
 import PaginateComponent from "./PaginateComponent";
 
-const Paginate = ({ currentPage, postsPerPage, totalPosts, paginate }) => {
+const Paginate = ({
+  currentPage,
+  postsPerPage,
+  totalPosts,
+  setCurrentPage,
+}) => {
+  // set page number in pagination
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className='mt-4'>
       <PaginateComponent
